@@ -52,6 +52,18 @@
       </div>
 
       <form id="tacticalForm" class="space-y-6">
+        <!-- ACTIONS -->
+        <div class="flex flex-col gap-2 sm:flex-row sm:justify-end">
+          <button type="button" id="exportJsonBtn" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900">
+            <span aria-hidden="true">📤</span> Export JSON
+          </button>
+          <button type="button" id="saveBtn" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900">
+            <span aria-hidden="true">💾</span> Sauvegarder
+          </button>
+          <button type="button" id="loadBtn" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900">
+            <span aria-hidden="true">📥</span> Charger
+          </button>
+        </div>
         <!-- INFORMATIONS GENERALES -->
         <section class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 sm:p-6">
           <div class="flex items-start justify-between gap-4">
@@ -308,6 +320,7 @@
       const themeIcon = document.getElementById('themeIcon');
       const clearBtn = document.getElementById('clearBtn');
       const printBtn = document.getElementById('printBtn');
+      const exportJsonBtn = document.getElementById('exportJsonBtn');
       const saveBtn = document.getElementById('saveBtn');
       const loadBtn = document.getElementById('loadBtn');
       const form = document.getElementById('tacticalForm');
@@ -378,6 +391,14 @@
 
       clearBtn.addEventListener('click', clearForm);
       printBtn.addEventListener('click', () => window.print());
+
+      exportJsonBtn.addEventListener('click', () => {
+        const data = getFormData();
+        const json = JSON.stringify(data, null, 2);
+        navigator.clipboard.writeText(json).then(() => {
+          alert('JSON copié dans le presse-papiers. Colle-le dans la conversation pour analyse.');
+        });
+      });
 
       saveBtn.addEventListener('click', () => {
         const data = getFormData();
