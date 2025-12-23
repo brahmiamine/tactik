@@ -147,10 +147,7 @@
               </div>
             </fieldset>
 
-            <div class="sm:col-span-2">
-              <label class="text-sm font-medium" for="problemNoBall">Problème principal observé</label>
-              <textarea id="problemNoBall" name="problemNoBall" rows="3" placeholder="Ex: ailiers ne replient pas, lignes trop étirées, couloir droit ouvert…" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:focus:ring-slate-700"></textarea>
-            </div>
+            
           </div>
         </section>
 
@@ -195,10 +192,7 @@
               </div>
             </fieldset>
 
-            <div class="sm:col-span-2">
-              <label class="text-sm font-medium" for="pressProblem">Problème observé</label>
-              <textarea id="pressProblem" name="pressProblem" rows="3" placeholder="Ex: un seul joueur presse, ligne trop basse, espaces derrière…" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:focus:ring-slate-700"></textarea>
-            </div>
+            
           </div>
         </section>
 
@@ -247,10 +241,7 @@
               </div>
             </fieldset>
 
-            <div class="sm:col-span-2">
-              <label class="text-sm font-medium" for="transitionProblem">Problème observé</label>
-              <textarea id="transitionProblem" name="transitionProblem" rows="3" placeholder="Ex: pas de solutions, pertes rapides, choix systématique long ballon…" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:focus:ring-slate-700"></textarea>
-            </div>
+            
           </div>
         </section>
 
@@ -299,62 +290,11 @@
               </div>
             </fieldset>
 
-            <div class="sm:col-span-2">
-              <label class="text-sm font-medium" for="attackProblem">Problème observé</label>
-              <textarea id="attackProblem" name="attackProblem" rows="3" placeholder="Ex: équipe trop prévisible, pas d’axe, manque de présence second poteau…" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:focus:ring-slate-700"></textarea>
-            </div>
+            
           </div>
         </section>
 
-        <!-- SYNTHESE -->
-        <section class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/30 sm:p-6">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h2 class="text-lg font-semibold">Synthèse coach</h2>
-              <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">Ce qui marche / ne marche pas, cause, correction prioritaire.</p>
-            </div>
-            <span class="rounded-xl border border-slate-200 px-3 py-1 text-xs text-slate-600 dark:border-slate-800 dark:text-slate-300">🧠</span>
-          </div>
-
-          <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <label class="text-sm font-medium" for="works">Ce qui fonctionne</label>
-              <textarea id="works" name="works" rows="3" placeholder="Ex: compacité, récupération haute, couloir gauche…" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:focus:ring-slate-700"></textarea>
-            </div>
-            <div>
-              <label class="text-sm font-medium" for="notWorks">Ce qui ne fonctionne pas</label>
-              <textarea id="notWorks" name="notWorks" rows="3" placeholder="Ex: pressing désorganisé, pertes au centre…" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:focus:ring-slate-700"></textarea>
-            </div>
-            <div class="sm:col-span-2">
-              <label class="text-sm font-medium" for="mainCause">Cause principale (collective)</label>
-              <input id="mainCause" name="mainCause" type="text" placeholder="Ex: distances entre lignes trop grandes / rôle des ailiers / couverture du 6…" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:focus:ring-slate-700" />
-            </div>
-            <div class="sm:col-span-2">
-              <label class="text-sm font-medium" for="priorityFix">Correction prioritaire (1 seule)</label>
-              <input id="priorityFix" name="priorityFix" type="text" placeholder="Ex: bloc 10m plus bas / ailier droit doit fermer l’intérieur / 6 en couverture…" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-slate-300 dark:border-slate-800 dark:bg-slate-950/40 dark:focus:ring-slate-700" />
-              <p class="mt-2 text-xs text-slate-600 dark:text-slate-400">Astuce : si tu hésites, choisis ce qui réduit le plus le risque (compacité, axe, couverture).</p>
-            </div>
-          </div>
-
-          <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div class="text-xs text-slate-600 dark:text-slate-400">
-              <span class="font-medium">Rappel :</span> analyse = observation répétée, pas une action isolée.
-            </div>
-            <div class="flex flex-col gap-2 sm:flex-row">
-              <button type="button" id="saveBtn" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900">
-                <span aria-hidden="true">💾</span> Sauvegarder
-              </button>
-              <button type="button" id="loadBtn" class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-900">
-                <span aria-hidden="true">📥</span> Charger
-              </button>
-              <button type="submit" class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:opacity-90 dark:bg-slate-100 dark:text-slate-950">
-                <span aria-hidden="true">✅</span> Valider
-              </button>
-            </div>
-          </div>
-
-          <div id="status" class="mt-4 hidden rounded-2xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-950/40 dark:text-slate-200"></div>
-        </section>
+        
       </form>
 
       <footer class="mt-10 text-center text-xs text-slate-500 dark:text-slate-500">
