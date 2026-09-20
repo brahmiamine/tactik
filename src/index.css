@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* Tailwind v4 : le mode sombre est piloté par la classe .dark sur <html>
+   (équivalent de `darkMode: 'class'` du prototype Tailwind CDN). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source "../index.html";
+
+/* Couleurs natives des contrôles de formulaire + scrollbars */
+html.dark {
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  color-scheme: light;
+}
+
+/* Radios un peu plus lisibles sans dépendre de plugins */
+input[type="radio"] {
+  accent-color: #4f46e5;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+}
+
+/* Impression : rendu propre */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}
