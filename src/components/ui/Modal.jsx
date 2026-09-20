@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
+import Button from './Button.jsx'
 
-export default function Modal({ title, content, onClose }) {
+/** Modale accessible : fermeture par Échap, clic sur le fond ou bouton. */
+export default function Modal({ title, content, onClose, closeLabel = 'Fermer' }) {
   useEffect(() => {
     const onKeyDown = (event) => {
       if (event.key === 'Escape') onClose()
@@ -26,14 +28,10 @@ export default function Modal({ title, content, onClose }) {
           {title}
         </h3>
         <p className="mt-3 whitespace-pre-line text-sm text-slate-700 dark:text-slate-300">{content}</p>
-        <div className="mt-4 text-right">
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white dark:bg-slate-100 dark:text-slate-900"
-          >
-            Fermer
-          </button>
+        <div className="mt-4 text-end">
+          <Button variant="primary" size="lg" onClick={onClose}>
+            {closeLabel}
+          </Button>
         </div>
       </div>
     </div>
