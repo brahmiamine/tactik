@@ -1,3 +1,5 @@
+import { COACH_INITIAL } from '../coach/questions.js'
+
 /**
  * Schéma du formulaire d'analyse tactique.
  *
@@ -71,4 +73,4 @@ export const SECTIONS = [
 export const FIELD_NAMES = SECTIONS.flatMap((section) => section.fields.map((field) => field.name))
 
 /** État initial : tous les champs vides. */
-export const INITIAL_FORM = Object.fromEntries(FIELD_NAMES.map((name) => [name, '']))
+export const INITIAL_FORM = { ...Object.fromEntries(FIELD_NAMES.map((name) => [name, ''])), ...COACH_INITIAL }

@@ -101,3 +101,56 @@ Le workflow `.github/workflows/deploy.yml` lance les tests puis le build, et pub
 3. Site publié sur `https://<utilisateur>.github.io/tactik/`.
 
 > Si le dépôt change de nom, adapter `base` dans `vite.config.js` (ou définir la variable `VITE_BASE`).
+
+## Assistant de décision en direct
+
+Le module **Décision immédiate** pose des questions adaptées au problème : couloir gauche,
+présence offensive, pressing ou contres. Il distingue les informations inconnues des réponses
+négatives. Les recommandations comportent une justification, une consigne, un risque et un
+critère de réévaluation. Les boutons Sauvegarder/Charger conservent également ces réponses,
+et les anciennes sauvegardes restent lisibles.
+
+L’export JSON (presse-papiers ou téléchargement) utilise `schemaVersion: 2` :
+`observations`, `analysis.candidates`, `analysis.decision`, `analysis.source`, `analysis.model`,
+`language` et `exportedAt`. La sauvegarde interne conserve son format historique.
+Toute modification des observations invalide la sélection IA précédente.
+
+### IA locale facultative
+
+- Moteur : [WebLLM](https://webllm.mlc.ai/docs/), chargé à la demande dans un Web Worker.
+- Modèle : `Qwen2.5-1.5B-Instruct-q4f16_1-MLC` (modèle existant, pas entraîné sur des matchs).
+- Le bouton IA est actif lorsque plusieurs propositions sont admissibles. Le modèle choisit
+  une priorité parmi ces propositions ; il ne génère pas librement des remplacements ou des consignes.
+- La sortie JSON est contrainte et validée : seul un identifiant de décision admissible est accepté.
+- WebGPU et une mémoire suffisante sont nécessaires. Le premier chargement télécharge les poids
+  depuis l’hébergement du modèle et les ressources du moteur ; le cache navigateur accélère les suivants.
+  Aucun appel à une API d’inférence distante, aucune transmission des observations à un serveur IA.
+- Aucun téléchargement de poids automatique. Annulation, délai maximal de trois minutes et
+  retour aux règles si le GPU, le chargement ou la sortie IA ne fonctionnent pas.
+- Le site complet n’est pas une PWA hors ligne : le cache du modèle ne garantit pas que la page
+  puisse être rouverte sans réseau.
+
+### Périmètre de cette première version
+
+Les règles sont des hypothèses tactiques explicites pour le 11 contre 11. Elles s’abstiennent
+si une information nécessaire manque, si le problème n’est pas répété ou si une correction a
+été tentée et demande une réévaluation. Les expulsions nécessitent une analyse spécifique.
+Les changements supposent que l’utilisateur confirme la disponibilité et l’adéquation du
+remplaçant, ainsi que l’autorisation de changer maintenant. Il n’y a pas encore de gestion complète
+d’effectif, de chronologie des matchs ou d’analyse vidéo.
+
+Le petit modèle local n’a pas été évalué comme un entraîneur expert. La pertinence et la latence
+sur les appareils cibles doivent être mesurées avant de dépendre de ses choix pendant un match.
+
+### Vérification
+
+```bash
+npm ci
+npm test
+npm run build
+```
+
+Les tests couvrent notamment les conditions des remplacements, le passage à deux attaquants,
+les données manquantes, les résultats IA invalides ou périmés et l’indisponibilité de WebGPU.
+Ils simulent l’inférence : une validation manuelle sur un navigateur avec un GPU compatible reste
+nécessaire pour mesurer le téléchargement et l’exécution réelle du modèle.

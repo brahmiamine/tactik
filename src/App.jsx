@@ -1,4 +1,6 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import CoachPanel from './coach/CoachPanel.jsx'
+import { buildReport } from './coach/decisions.js'
 import Footer from './components/Footer.jsx'
 import FormActions from './components/FormActions.jsx'
 import Header from './components/Header.jsx'
@@ -12,20 +14,26 @@ import { copyText } from './lib/clipboard.js'
 
 /** Contenu applicatif : ne contient que de l'orchestration. */
 function TacticalGrid({ onToggleLanguage }) {
-  const { t } = useI18n()
+  const { t, language } = useI18n()
   const { isDark, toggleTheme } = useTheme()
   const { message, notify } = useStatusMessage()
   const { modal, openModal, closeModal } = useModal()
-  const { form, setField, reset, toJson, save, load } = useTacticalForm()
+  const { form, setField, reset, save, load } = useTacticalForm()
+
+  const [ai, setAI] = useState(null)
+  const report = buildReport(form, language, ai)
+  const exportJson = JSON.stringify(report, null, 2)
+
+  useEffect(() => { setAI(null) }, [form])
 
   useEffect(() => {
     document.title = t('meta.title')
   }, [t])
 
   const handleExport = useCallback(async () => {
-    const copied = await copyText(toJson())
+    const copied = await copyText(exportJson)
     notify(copied ? t('status.copied') : t('status.copyFailed'))
-  }, [notify, t, toJson])
+  }, [notify, t, exportJson])
 
   const handleSave = useCallback(() => {
     notify(save() ? t('status.saved') : t('status.saveFailed'))
@@ -64,6 +72,7 @@ function TacticalGrid({ onToggleLanguage }) {
       />
 
       <main className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
+        <CoachPanel form={form} onChange={setField} report={report} onAI={setAI} />
         <TipBanner />
         <TacticalForm
           form={form}
